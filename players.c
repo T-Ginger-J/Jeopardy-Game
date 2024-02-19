@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "assert.h"
 #include "players.h"
 
 // Returns true if the player name matches one of the existing players
@@ -24,7 +25,7 @@ bool player_exists(player *players, int num_players, char *name)
 // player given their name
 void update_score(player *players, int num_players, char *name, int score)
 {
-    assert(playerExists(players, num_players, name));
+    assert(player_exists(players, num_players, name));
     int playerind = 0;
     while(strcmp(players[playerind].name, name) != 0) {
         playerind++;
