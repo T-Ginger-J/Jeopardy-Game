@@ -20,10 +20,34 @@
 // Put global environment variables here
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
-void tokenize(char *input, char **tokens);
+void tokenize(char *input, char **tokens) { // todo: this is buggy and idt it works. test later
+    char *token = strtok(input, " ");
+    printf("token: %s\n", token);
+    tokens = &token;
+    tokens++;
+    while (token != NULL) {
+        token = strtok(NULL, " ");
+        printf("token: %s\n", token);
+        if (token == NULL) break;
+        tokens = &token;
+        tokens++;
+    }
+
+    /*tokens-=4;
+    for (int j=0; j <4; j++) {
+        printf("%s\n", *(tokens));
+    }*/
+}
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
-void show_results(player *players, int num_players);
+void show_results(player *players, int num_players) {
+    printf("Player scores\n");
+    // todo. sort this
+    for (int i=0; i < num_players; i++) {
+        player p = *(players+i);
+        printf("player %s score: %d\n", p.name, p.score);
+    }
+}
 
 
 int main(int argc, char *argv[])
@@ -38,8 +62,21 @@ int main(int argc, char *argv[])
     initialize_game();
 
     // Prompt for players names
-    
-    // initialize each of the players in the array
+    printf("List 4 players\n");
+    for (int i =0; i< 4; i++) {
+        printf("player %d: ", i+1);
+        fgets(buffer, BUFFER_LEN, stdin);
+        buffer[strcspn(buffer, "\n")] = 0; // clears trailing \n
+
+        // creates the player
+        player p;
+        strcpy(p.name, buffer);
+        p.score = 0;
+        players[i] = p;
+
+        strcpy(buffer, ""); // empties buffer
+    }
+    show_results(players, NUM_PLAYERS);
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
