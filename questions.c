@@ -40,18 +40,29 @@ void display_categories(void) {
 }
 
 // Displays the question for the category and dollar value
-void display_question(char *category, int value)
-{
-	find_index(category, value);
-	
+void display_question(char *category, int value) {
+    if (already_answered(category, value)) {
+        printf("Question already answered.\n");
+    } else {
+	    int index = find_index(category, value);
+        assert(index != -1);
+	    printf("Category: %s\nValue: %d\nQuestion: %s\n", questions[index].category, questions[index].value, questions[index].question);
+    }
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
-bool valid_answer(char *category, int value, char *answer)
-{
-	find_index(category, value);
-   
-    return false;
+bool valid_answer(char *category, int value, char *answer) {
+	int index = find_index(category, value);
+    assert(index != -1);
+    // quit early if the lengths dont match
+    if (strlen(answer) == strlen(questions[index].answer))
+        return false;
+    // since we don't want to force capitalization correctness, impement custom compare
+    for (int i = 0; i < sizeof(answer) / sizeof(char); i++) {
+        if (strncmp(answer, questions[index].answer, i) != 0 && strncmp(answer, questions[index].answer, i) != ('A' - 'a'))
+            return false;
+    }
+    return true;
 }
 
 // Returns true if the question has already been answered
