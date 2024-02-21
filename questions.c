@@ -47,7 +47,11 @@ void display_categories(void) {
     printf("|\n%s\n", lineBreak);
     for (int i = 0; i < NUM_QUESTIONS / NUM_CATEGORIES; i++) {
         for (int j = 0; j < NUM_CATEGORIES; j++) {
-            printf("| %*s ", catNameLength[j], questions[j * (NUM_QUESTIONS / NUM_CATEGORIES) + i]);
+            if (questions[j * (NUM_QUESTIONS / NUM_CATEGORIES) + i].answered) {
+                printf("| %*s ", catNameLength[j], "");
+            } else {
+                printf("| %*s ", catNameLength[j], questions[j * (NUM_QUESTIONS / NUM_CATEGORIES) + i]);
+            }
         }
         printf("|\n%s\n", lineBreak);
     }
@@ -76,6 +80,7 @@ bool valid_answer(char *category, int value, char *answer) {
         if (strncmp(answer, questions[index].answer, i) != 0 && strncmp(answer, questions[index].answer, i) != ('A' - 'a'))
             return false;
     }
+    questions[index].answered = true;
     return true;
 }
 

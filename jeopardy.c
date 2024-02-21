@@ -63,6 +63,14 @@ void show_results(player *players, int num_players) {
     }
 }
 
+bool unansweredQuestions() {
+    for (int i = 0; i < sizeof(questions)/sizeof(question); i++) {
+        if (!questions[i].answered)
+            return true;
+    }
+    return false;
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -96,14 +104,30 @@ int main(int argc, char *argv[])
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
-        // Call functions from the questions and players source files
-        buffer[strcspn(buffer, "\n")] = 0; // clears trailing \n
-        tokenize(buffer, &tokens);
-
+        if (!unansweredQuestions)
+            break;
+        for (int i = 0; i < 4; i++) {
+            display_categories();
+            printf("%s please select a category and value: ", players[i].name);
+            buffer[strcspn(buffer, "\n")] = 0; // clears trailing \n
+            tokenize(buffer, &tokens);
+            display_question(tokens[0], atoi(tokens[1]));
+            printf("What is your answer: ");
+            char ans[MAX_LEN];
+            scanf("%[^\n]", ans);
+            bool correct = valid_answer(tokens[0], atoi(tokens[1]), ans);
+            if (correct) {
+                printf("CORRECT!\n");
+                update_score(players, players[i].name, atoi(tokens[1]));
+            } else {
+                printf("INCORRECT!");
+                update_score(players, players[i].name, -1 * atoi(tokens[1]));
+            }
+        }
         // Execute the game until all questions are answered
-
-        // Display the final results and exit
-        show_results(players, NUM_PLAYERS);
     }
+    // Display the final results and exit
+    show_results(players, NUM_PLAYERS);
+
     return EXIT_SUCCESS;
 }
