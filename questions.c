@@ -17,9 +17,26 @@ void initialize_game(void)
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
-void display_categories(void)
-{
-    // print categories and dollar values for each unanswered question in questions array
+void display_categories(void) {
+    int catNameLength[NUM_CATEGORIES];
+    int spacer = 1;
+    for (int i = 0; i < NUM_CATEGORIES; i++) {
+        catNameLength[i] = strlen(categories[i]);
+        spacer += 3 + catNameLength[i];
+    }
+    char lineBreak[spacer + 1];
+    lineBreak[spacer] = '\0';
+    memset(lineBreak, '-', spacer);
+    for (int i = 0; i < NUM_CATEGORIES; i++) {
+        printf("| %s ", categories[i]);
+    }
+    printf("|\n%s\n", lineBreak);
+    for (int i = 0; i < NUM_QUESTIONS / NUM_CATEGORIES; i++) {
+        for (int j = 0; j < NUM_CATEGORIES; j++) {
+            printf("| %*s ", catNameLength[j], questions[j * (NUM_QUESTIONS / NUM_CATEGORIES) + i]);
+        }
+        printf("|\n%s\n", lineBreak);
+    }
 }
 
 // Displays the question for the category and dollar value
@@ -36,8 +53,16 @@ bool valid_answer(char *category, int value, char *answer)
 }
 
 // Returns true if the question has already been answered
-bool already_answered(char *category, int value)
-{
-    // lookup the question and see if it's already been marked as answered
+bool already_answered(char *category, int value) {
+    for (int i = 0; i < NUM_CATEGORIES; i++) {
+        if (strcmp(category, categories[i])) {
+            for (int j = 0; j < NUM_QUESTIONS / NUM_CATEGORIES; i++) {
+                if (questions[i * 4 + j].value == value) {
+                    return questions[i * 4 + j].answered;
+                }
+            }
+        }
+    }
+    // failsafe in event of a question somehow not being found
     return false;
 }
