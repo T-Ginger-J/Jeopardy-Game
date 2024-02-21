@@ -11,9 +11,22 @@
 #include "questions.h"
 
 // Initializes the array of questions for the game
-void initialize_game(void)
-{
+void initialize_game(void) {
     // initialize each question struct and assign it to the questions array
+    //questions = (question *) calloc(NUM_QUESTIONS, sizeof(question));
+    question questionsinit[12] = {{"Data Structures", "The simplest data structure holding a collection of elements accessed by an index", "what is an array", 200, false},
+                                {"Data Structures", "The Data Structure with branches stemming from a root", "what is a tree", 400, false},
+                                {"Data Structures", "The acronym used to describe the order Stack data structures add and remove elements", "what is LIFO", 600, false},
+                                {"Data Structures", "The big O time complexity describing adding, removing or searching in a hash tables", "what is 1", 800, false},
+                                {"Operating Systems", "The macintosh uses this operating system", "what is MAC OS", 200, false},
+                                {"Operating Systems", "The part of the operating system dedicated to selecting which proccess to execute", "what is the scheduler", 400, false},
+                                {"Operating Systems", "The memory management technique that uses RAM and disk space to simulate additional memory", "what is virtual memory", 600, false},
+                                {"Operating Systems", "The full name for the creator of the Linux operating system", "who is Linus Torvalds", 800, false},
+                                {"Project Management", "A commonly used graphical representation of tasks and their timelines", "what is a gantt chart", 200, false},
+                                {"Project Management", "The person responsible for defining project scope and ensuring deadlines are met", "who is project manager", 400, false},
+                                {"Project Management", "The longest sequence of dependent tasks that determines the minimum time for the project", "what is the critical path", 600, false},
+                                {"Project Management", "The acronym describing the cradle to coffin of developing software", "what is SDLC", 800, false}};
+    memcpy(questions, questionsinit, sizeof(questions));
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
