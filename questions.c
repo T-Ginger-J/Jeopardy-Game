@@ -42,27 +42,35 @@ void display_categories(void) {
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
-
+	find_index(category, value);
+	
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
-    // Look into string comparison functions
+	find_index(category, value);
+   
     return false;
 }
 
 // Returns true if the question has already been answered
 bool already_answered(char *category, int value) {
-    for (int i = 0; i < NUM_CATEGORIES; i++) {
+    // lookup the question and see if it's already been marked as answered
+    int index = find_index(category, value);
+    assert(index != -1);
+    return questions[index].answered;
+}
+
+int find_index(char *category, int value) {
+	for (int i = 0; i < NUM_CATEGORIES; i++) {
         if (strcmp(category, categories[i])) {
             for (int j = 0; j < NUM_QUESTIONS / NUM_CATEGORIES; i++) {
                 if (questions[i * 4 + j].value == value) {
-                    return questions[i * 4 + j].answered;
+                    return i * 4 + j;
                 }
             }
         }
     }
-    // failsafe in event of a question somehow not being found
-    return false;
+	return -1;
 }
