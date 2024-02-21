@@ -20,51 +20,18 @@
 // Put global environment variables here
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
-void tokenize(char *input, char ***tokens) { // todo: segfaults and idk why
-
-    // find num tokens
+void tokenize(char *input, char tokens[][100]) {
     char *token = strtok(input, " ");
-    int i=0;
+    //printf("%s\n", token);
+    strcpy(tokens[0], token);
+    int i=1;
     while (token != NULL) {
         token = strtok(NULL, " ");
         if (token == NULL) break;
-        i++;
-    }
-
-    *tokens = (char**) malloc( (i+1)* sizeof(char*)); // realloc memory
-    if (*tokens == NULL) {
-        printf("mem allocation failure\n");
-    }
-
-    token = strtok(input, " ");
-    strcpy((*tokens)[0], token);
-    i=1;
-    while (token != NULL) {
-        token = strtok(NULL, " ");
-        if (token == NULL) break;
-        strcpy((*tokens)[i], token);
-        i++;
-    }
-
-
-    /*int i=0;
-    char *token = strtok(input, " ");
-    printf("token: %s\n", token);
-    strcpy(tokens[i], token);
-    //tokens++;
-    i++;
-    while (token != NULL) {
-        token = strtok(NULL, " ");
-        printf("token: %s\n", token);
-        if (token == NULL) break;
+        //printf("%s\n", token);
         strcpy(tokens[i], token);
         i++;
     }
-
-    for (int j=0; j <= i; j++){
-        printf("%s ", tokens[j]);
-    }
-    printf("\n");*/
 }
 
 void sort(player *players, int num_players) { // bubble sort
@@ -104,13 +71,13 @@ int main(int argc, char *argv[])
     
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
-    char **tokens;
+    char tokens[][100]= {};
 
     // Display the game introduction and initialize the questions
     initialize_game();
 
     // Prompt for players names
-    /*printf("List 4 players\n");
+    printf("List 4 players\n");
     for (int i =0; i< 4; i++) {
         printf("player %d: ", i+1);
         fgets(buffer, BUFFER_LEN, stdin);
@@ -124,19 +91,18 @@ int main(int argc, char *argv[])
 
         strcpy(buffer, ""); // empties buffer
     }
-    show_results(players, NUM_PLAYERS);*/
+    show_results(players, NUM_PLAYERS);
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
         // Call functions from the questions and players source files
-        printf("erge");
+        buffer[strcspn(buffer, "\n")] = 0; // clears trailing \n
         tokenize(buffer, &tokens);
 
         // Execute the game until all questions are answered
 
         // Display the final results and exit
-        free(tokens);
     }
     return EXIT_SUCCESS;
 }
