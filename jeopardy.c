@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
         // Execute the game until all questions are answered
 
         // Display the final results and exit
+        show_results(players, NUM_PLAYERS);
     }
     return EXIT_SUCCESS;
 }
