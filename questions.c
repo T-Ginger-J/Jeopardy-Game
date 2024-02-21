@@ -25,13 +25,15 @@ void display_categories(void)
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
-
+	find_index(category, value);
+	
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
-    // Look into string comparison functions
+	find_index(category, value);
+   
     return false;
 }
 
@@ -39,5 +41,21 @@ bool valid_answer(char *category, int value, char *answer)
 bool already_answered(char *category, int value)
 {
     // lookup the question and see if it's already been marked as answered
+    find_index(category, value);
     return false;
+}
+
+int find_index(char *category, int value, char *answer)
+{
+	int index = (value / 200) - 1;
+	if (strcomp(category, "category1") == 0){
+	} else if (strcomp(category, "category2") == 0){
+		index += 4;
+	} else if (strcomp(category, "category3") == 0){
+		index += 8;
+	} else {
+		index = -1;
+	}
+	return index;
+	
 }
