@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     show_results(players, NUM_PLAYERS);
 
     // Perform an infinite loop getting command input from users until game ends
-    while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
+    while (true)
     {
         if (!unansweredQuestions)
             break;
