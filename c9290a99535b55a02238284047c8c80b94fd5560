@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1198df2_af5d1a65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037900
+      },
+      "writtenOn": "2024-03-25T18:32:34Z",
+      "side": 1,
+      "message": "Nice to See Gerrit Works for reviewing Code",
+      "revId": "c9290a99535b55a02238284047c8c80b94fd5560",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
