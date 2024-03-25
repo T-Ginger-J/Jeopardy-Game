@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fdc7f6_f48ebde6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037902
+      },
+      "writtenOn": "2024-03-25T18:32:48Z",
+      "side": 1,
+      "message": "Gerrit is working as intended",
+      "revId": "f4defe32f706bced79a5359b57a77ca4e8b5e4fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
