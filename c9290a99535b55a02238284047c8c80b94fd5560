@@ -16,6 +16,23 @@
       "message": "Nice to See Gerrit Works for reviewing Code",
       "revId": "c9290a99535b55a02238284047c8c80b94fd5560",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7f4973_62e9c0ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037900
+      },
+      "writtenOn": "2024-03-25T18:34:18Z",
+      "side": 1,
+      "message": "Resolved",
+      "revId": "c9290a99535b55a02238284047c8c80b94fd5560",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
